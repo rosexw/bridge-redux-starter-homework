@@ -13,7 +13,7 @@ const DaBest = ({name}) => <h1>The Best: {name}</h1>;
 const AdderButton = ({add}) => <button class="AdderButton" onClick={() => add({name: 'Sofa'})}>Add Sofa</button>
 
 
-const RemoverButton = ({remove}) => <button class="RemoverButton" onClick={() => remove({id: '1'})}><i class="fas fa-times"></i></button>
+const RemoverButton = ({remove, id}) => <button class="RemoverButton" onClick={() => remove(id)}><i class="fas fa-times"></i></button>
 
 class App extends Component {
 
@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   render() {
-    const {productList, add, whoIsTheBest} = this.props;
+    const {productList, add, whoIsTheBest, remove} = this.props;
     debugger;
     return (
       <div class="bodyContent">
@@ -49,7 +49,7 @@ class App extends Component {
         {productList.map(product =>
           <div>
             <Product name={product.name} key={product.id} />
-            <RemoverButton {...this.props} />
+            <RemoverButton remove={remove} id={product.id} />
           </div> )}
 
         <AdderButton {...this.props} />
@@ -58,13 +58,14 @@ class App extends Component {
   }
 }
 
+  // however, if sofa is added more than once, it removes all instances of sofa
 
 // React x REDUX STUFF
 
 const mapStateToProps = state => {
   return {
     productList: state.products.productList,
-    whoIsTheBest: 'Della',
+    whoIsTheBest: 'Rose',
 
     // an example of how to derive state in the mapStateToProps function - this is a specific 'subset' of the full list
     lowStockProducts: state.products.productList.filter(prod => prod.stock && prod.stock < 4),

@@ -18,7 +18,7 @@ export const products = (state = INITIAL_STATE, {type, payload}) => {
         };
         case ACTION_TYPES.removeProduct:
             return {...state, productList:
-            state.productList.slice(0, payload.id)
+            state.productList.filter(product => product.id !== payload.id)
         };
     }
     return state;

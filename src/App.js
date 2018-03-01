@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
-import {addProduct} from './actions/index';
-import {removeProduct} from './actions/index';
+import {addProduct, removeProduct} from './actions/index';
 import Chance from 'chance';
 
 export const chance = Chance();
 
-const Product = (props) => <div>{props.name}</div>;
+const Product = (props) => <div class="Product">{props.name}</div>;
 
 const DaBest = ({name}) => <h1>The Best: {name}</h1>;
 
-const AdderButton = ({add}) => <button onClick={() => add({name: 'Sofa'})}>Add Sofa</button>
+const AdderButton = ({add}) => <button class="AdderButton" onClick={() => add({name: 'Sofa'})}>Add Sofa</button>
 
 
-const RemoverButton = ({remove}) => <button onClick={() => remove({id: '1'})}>x</button>
+const RemoverButton = ({remove}) => <button class="RemoverButton" onClick={() => remove({id: '1'})}><i class="fas fa-times"></i></button>
 
 class App extends Component {
 
@@ -45,7 +44,7 @@ class App extends Component {
     const {productList, add, whoIsTheBest} = this.props;
     debugger;
     return (
-      <div>
+      <div class="bodyContent">
         <DaBest name={whoIsTheBest}/>
         {productList.map(product =>
           <div>
